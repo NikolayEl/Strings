@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <Windows.h>
 
 using namespace std;
@@ -27,17 +27,17 @@ void main()
 	SetConsoleCP(866);
 	int size = StringLenght(str);
 	cout << str << endl;
-	cout << "Ðàçìåð ââåäåííîé ñòðîêè - " << StringLenght(str) << endl;
+	cout << "Ð Ð°Ð·Ð¼ÐµÑ€ Ð²Ð²ÐµÐ´ÐµÐ½Ð½Ð¾Ð¹ ÑÑ‚Ñ€Ð¾ÐºÐ¸ - " << StringLenght(str) << endl << endl;
 	//--------------------------------------------------------------------------------------
-	//cout << "Ïåðåâîäèì âñþ ñòðîêó â íèæíèé ðåãèñòð" << endl;
-	//str[size] = To_Lower(str);
-	//cout << str << endl << endl;
+	cout << "ÐŸÐµÑ€ÐµÐ²Ð¾Ð´Ð¸Ð¼ Ð²ÑÑŽ ÑÑ‚Ñ€Ð¾ÐºÑƒ Ð² Ð½Ð¸Ð¶Ð½Ð¸Ð¹ Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€" << endl;
+	str[size] = To_Lower(str);
+	cout << str << endl << endl;
 
-	//cout << "Ïåðåâîäèì âñþ ñòðîêó â âåðõíèé ðåãèñòð" << endl;
-	//str[size] = To_Upper(str);
-	//cout << str << endl << endl;
+	cout << "ÐŸÐµÑ€ÐµÐ²Ð¾Ð´Ð¸Ð¼ Ð²ÑÑŽ ÑÑ‚Ñ€Ð¾ÐºÑƒ Ð² Ð²ÐµÑ€Ñ…Ð½Ð¸Ð¹ Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€" << endl;
+	str[size] = To_Upper(str);
+	cout << str << endl << endl;
 
-	cout << "Óäàëÿåì èç ñòðîêè âñå ëèøíèå ïðîáåëû" << endl;
+	cout << "Ð£Ð´Ð°Ð»ÑÐµÐ¼ Ð¸Ð· ÑÑ‚Ñ€Ð¾ÐºÐ¸ Ð²ÑÐµ Ð»Ð¸ÑˆÐ½Ð¸Ðµ Ð¿Ñ€Ð¾Ð±ÐµÐ»Ñ‹" << endl;
 	str[size] = Shrink(str, size);
 	cout << str << endl << endl;	
 
@@ -69,7 +69,7 @@ char To_Upper(char str[])
 	int size = StringLenght(str);
 	for (int i = 0; i < size; i++)
 	{
-		if (((int)str[i] >= 97 && (int)str[i] <= 122) || ((int)str[i] >= -32 && (int)str[i] <= -1)) str[i] -= 32; // Ðàáîòàåò ENG/RUS â äåéñòâóþùèõ êîäèðîâêàõ
+		if (((int)str[i] >= 97 && (int)str[i] <= 122) || ((int)str[i] >= -32 && (int)str[i] <= -1)) str[i] -= 32; // Ð Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚ ENG/RUS Ð² Ð´ÐµÐ¹ÑÑ‚Ð²ÑƒÑŽÑ‰Ð¸Ñ… ÐºÐ¾Ð´Ð¸Ñ€Ð¾Ð²ÐºÐ°Ñ…
 	}
 	return str[size];
 }
@@ -79,12 +79,12 @@ char To_Lower(char str[])
 	int size = StringLenght(str);
 	for (int i = 0; i < size; i++)
 	{
-		if (((int)str[i] >= 65 && (int)str[i] <= 92) || ((int)str[i] >= -64 && (int)str[i] <= -33)) str[i] += 32;// Ðàáîòàåò ENG/RUS â äåéñòâóþùèõ êîäèðîâêàõ
+		if (((int)str[i] >= 65 && (int)str[i] <= 92) || ((int)str[i] >= -64 && (int)str[i] <= -33)) str[i] += 32;// Ð Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚ ENG/RUS Ð² Ð´ÐµÐ¹ÑÑ‚Ð²ÑƒÑŽÑ‰Ð¸Ñ… ÐºÐ¾Ð´Ð¸Ñ€Ð¾Ð²ÐºÐ°Ñ…
 	}
 	return str[size];
 }
 
-char Shrink(char str[], int& size) // Ïðîáåë  32 â òàáëèöå
+char Shrink(char str[], int& size) // ÐŸÑ€Ð¾Ð±ÐµÐ»  32 Ð² Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ðµ
 {
 	char buffer[256]{};
 	for (int i = 0; i < size; i++)buffer[i] = str[i];
