@@ -8,6 +8,7 @@ int StringLenght(const char str[]);
 char To_Lower(char str[]);
 char To_Upper(char str[]);
 char Shrink(char str[], int &size);
+bool Is_Palindrome(char str[]);
 
 void main()
 {
@@ -41,14 +42,16 @@ void main()
 	str[size] = Shrink(str, size);
 	cout << str << endl << endl;	
 
-
-
+	cout << "Определяем является ли строка полиндромом" << endl;
+	if (Is_Palindrome(str)) cout << "Строка является полиндромом" << endl << endl;
+	else cout << "Строка не полиндром" << endl << endl;
 
 	
 
 
 	cout << int(str[7]);
 	cout << str[size + 1];
+	cout << size % 2;
 
 }
 
@@ -100,4 +103,12 @@ char Shrink(char str[], int& size) // Пробел  32 в таблице
 	for (int i = j; i <= size; i++) str[i] = {};
 	size = j;
 	return str[size];
+}
+
+bool Is_Palindrome(char str[])
+{
+	int size = StringLenght(str);
+	if (size % 2 != 0) return false;
+	for (int i = 0, j = size - 1; i < size / 2; i++, j--) if (str[i] != str[j]) return false;
+	return true;
 }
