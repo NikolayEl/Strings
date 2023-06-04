@@ -54,13 +54,7 @@ void main()
 	
 	cout << "Если строка является целым числом, то возвращаем его значение" << endl;
 	if (Is_Int_Number(str)) cout << "Возвращаемое число - " << To_Int_Number(str) << ", показываем тип числа - " << typeid(To_Int_Number(str)).name() << endl << endl;
-	else cout << "Строка не целое число и мы не можем вывести его значение в int" << endl << endl;
-
-
-	//cout << int(str[0]);
-	//cout << str[size + 1];
-	//cout << size % 2;
-
+	else cout << "Строка не целое число и мы не можем перевести его значение в int" << endl << endl;
 }
 
 
