@@ -112,6 +112,7 @@ char* Shrink(char str[], int& size) // Пробел  32 в таблице
 			for (int j = i + 1; str[j]; j++)str[j] = str[j + 1];
 		}
 	}
+	while (str[0] == ' ') for (int i = 0; str[i]; i++) str[i] = str[i + 1];
 	return str;
 }
 
