@@ -64,18 +64,18 @@ void main()
 
 int StringLenght(const char str[])
 {
-	//int count = 0;
+	//int count = 0; //my code
 	//while (count != 0); count++;
 	//return count;
 
-	int i = 0;
+	int i = 0; //code of Oleg Anatolyevich
 	for (; str[i]; i++);
 	return i;
 }
 
 char To_Upper(char str[])
 {
-	int size = StringLenght(str);
+	int size = StringLenght(str); //my code
 	for (int i = 0; i < size; i++)
 	{
 		if (((int)str[i] >= 97 && (int)str[i] <= 122) || ((int)str[i] >= -32 && (int)str[i] <= -1)) str[i] -= 32; // Работает ENG/RUS в действующих кодировках
@@ -86,7 +86,7 @@ char To_Upper(char str[])
 char* To_Lower(char str[])
 {
 	int size = StringLenght(str);
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < size; i++) //my code
 	{
 		if (((int)str[i] >= 65 && (int)str[i] <= 92) || ((int)str[i] >= -64 && (int)str[i] <= -33)) str[i] += 32;// Работает ENG/RUS в действующих кодировках
 	}
@@ -95,7 +95,7 @@ char* To_Lower(char str[])
 
 char* Shrink(char str[], int& size) // Пробел  32 в таблице
 {
-	//char buffer[256]{};
+	//char buffer[256]{}; //my code
 	//for (int i = 0; i < size; i++)buffer[i] = str[i];
 	//bool temp = false;
 	//int j = 0;
@@ -110,7 +110,7 @@ char* Shrink(char str[], int& size) // Пробел  32 в таблице
 	//size = j;
 	//return str[size];
 
-	for (int i = 0; str[i]; i++)
+	for (int i = 0; str[i]; i++) //code of Oleg Anatolyevich
 	{
 		while (str[i] == ' ' && str[i + 1] == ' ')
 		{
@@ -123,7 +123,7 @@ char* Shrink(char str[], int& size) // Пробел  32 в таблице
 
 bool Is_Palindrome(const char str[])
 {
-	/*int size = StringLenght(str);
+	/*int size = StringLenght(str); //my code
 	str[size] = To_Lower(str);
 	char buffer[256] = {};
 	buffer[size] = str[size];
@@ -140,7 +140,7 @@ bool Is_Palindrome(const char str[])
 	for (int i = 0, j = size - 1; i < size / 2; i++, j--) if (str[i] != str[j]) return false;
 	return true;*/
 
-	int n = strlen(str);
+	int n = strlen(str); //code of Oleg Anatolyevich
 	char* buffer = new char[n + 1] {};
 	strcpy(buffer, str);
 	str = To_Lower(buffer);
@@ -160,14 +160,14 @@ bool Is_Palindrome(const char str[])
 
 bool Is_Int_Number(char str[])
 {
-	int size = StringLenght(str);
+	int size = StringLenght(str); //my code
 	for (int i = 0; i < size; i++) if ((int)str[i] < 48 || (int)str[i] > 57) return false;
 	return true;
 }
 
 int To_Int_Number(char str[])
 {
-	int number = 0;
+	int number = 0; //my code
 	for (int i = 0; str[i]; i++)
 	{
 		if ((int)str[i] >= 48 && str[i] <= 57) number = number * 10 + (int)str[i] - 48;
@@ -177,7 +177,7 @@ int To_Int_Number(char str[])
 
 char* remove_symbol(char str[], char symbol)
 {
-	for (int i = 0; str[i]; i++)
+	for (int i = 0; str[i]; i++) //code of Oleg Anatolyevich
 	{
 		while (str[i] == symbol)for (int j = i; str[j]; j++)str[j] = str[j + 1];
 	}
