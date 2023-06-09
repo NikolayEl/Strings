@@ -1,16 +1,18 @@
-﻿#include <iostream>
+﻿#define _CRT_SECURE_NO_WARNINGS 
+#include <iostream>
 #include <Windows.h>
 
 using namespace std;
 
 
 int StringLenght(const char str[]);
-char To_Lower(char str[]);
+char* To_Lower(char str[]);
 char To_Upper(char str[]);
 char* Shrink(char str[], int &size);
-bool Is_Palindrome(char str[]);
+bool Is_Palindrome(const char str[]);
 bool Is_Int_Number(char str[]);
 int To_Int_Number(char str[]);
+char* remove_symbol(char str[], char symbol);
 
 void main()
 {
@@ -33,8 +35,7 @@ void main()
 	cout << "Размер введенной строки - " << StringLenght(str) << endl << endl;
 	//---------------------------------------------------------------------------------------
 	cout << "Переводим всю строку в нижний регистр" << endl;
-	str[size] = To_Lower(str);
-	cout << str << endl << endl;
+	cout << To_Lower(str) << endl << endl;
 
 	cout << "Переводим всю строку в верхний регистр" << endl;
 	str[size] = To_Upper(str);
@@ -43,9 +44,11 @@ void main()
 	cout << "Удаляем из строки все лишние пробелы" << endl;
 	cout << Shrink(str, size) << endl << endl;
 
-	cout << "Определяем является ли строка полиндромом" << endl;
-	if (Is_Palindrome(str)) cout << "Строка является полиндромом" << endl << endl;
-	else cout << "Строка не полиндром" << endl << endl;
+	//cout << "Определяем является ли строка полиндромом" << endl;
+	//if (Is_Palindrome(str)) cout << "Строка является полиндромом" << endl << endl;
+	//else cout << "Строка не полиндром" << endl << endl;
+
+	cout << "Строка " << (Is_Palindrome(str) ? "" : "НЕ ") << "является палиндромом" << endl << endl;
 
 	cout << "Определяем является ли строка целым числом" << endl;
 	if (Is_Int_Number(str)) cout << "Строка является целым числом" << endl << endl;
@@ -54,6 +57,8 @@ void main()
 	cout << "Если строка является целым числом, то возвращаем его значение" << endl;
 	if (Is_Int_Number(str)) cout << "Возвращаемое число - " << To_Int_Number(str) << ", показываем тип числа - " << typeid(To_Int_Number(str)).name() << endl << endl;
 	else cout << "Строка не целое число и мы не можем перевести его значение в int" << endl << endl;
+
+	cout << str << endl;
 }
 
 
@@ -78,14 +83,14 @@ char To_Upper(char str[])
 	return str[size];
 }
 
-char To_Lower(char str[])
+char* To_Lower(char str[])
 {
 	int size = StringLenght(str);
 	for (int i = 0; i < size; i++)
 	{
 		if (((int)str[i] >= 65 && (int)str[i] <= 92) || ((int)str[i] >= -64 && (int)str[i] <= -33)) str[i] += 32;// Работает ENG/RUS в действующих кодировках
 	}
-	return str[size];
+	return str;
 }
 
 char* Shrink(char str[], int& size) // Пробел  32 в таблице
@@ -116,9 +121,9 @@ char* Shrink(char str[], int& size) // Пробел  32 в таблице
 	return str;
 }
 
-bool Is_Palindrome(char str[])
+bool Is_Palindrome(const char str[])
 {
-	int size = StringLenght(str);
+	/*int size = StringLenght(str);
 	str[size] = To_Lower(str);
 	char buffer[256] = {};
 	buffer[size] = str[size];
@@ -133,6 +138,23 @@ bool Is_Palindrome(char str[])
 	}
 	if (size % 2 != 0) return false;
 	for (int i = 0, j = size - 1; i < size / 2; i++, j--) if (str[i] != str[j]) return false;
+	return true;*/
+
+	int n = strlen(str);
+	char* buffer = new char[n + 1] {};
+	strcpy(buffer, str);
+	str = To_Lower(buffer);
+	str = remove_symbol(buffer, ' ');
+	n = StringLenght(buffer);
+	for (int i = 0; i < n / 2; i++)
+	{
+		if (buffer[i] != buffer[n - i - 1])
+		{
+			delete buffer;
+			return false;
+		}
+	}
+	delete buffer;
 	return true;
 }
 
@@ -145,14 +167,19 @@ bool Is_Int_Number(char str[])
 
 int To_Int_Number(char str[])
 {
-	int size = StringLenght(str);
 	int number = 0;
-	for (int i = 0; i < size; i++)
+	for (int i = 0; str[i]; i++)
 	{
-		if ((int)str[i] >= 48 && str[i] <= 57)
-		{
-			number = number * 10 + (int)str[i] - 48;
-		}
+		if ((int)str[i] >= 48 && str[i] <= 57) number = number * 10 + (int)str[i] - 48;
 	}
 	return number;
+}
+
+char* remove_symbol(char str[], char symbol)
+{
+	for (int i = 0; str[i]; i++)
+	{
+		while (str[i] == symbol)for (int j = i; str[j]; j++)str[j] = str[j + 1];
+	}
+	return str;
 }
