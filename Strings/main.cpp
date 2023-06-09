@@ -110,6 +110,18 @@ char Shrink(char str[], int& size) // Пробел  32 в таблице
 bool Is_Palindrome(char str[])
 {
 	int size = StringLenght(str);
+	str[size] = To_Lower(str);
+	char buffer[256] = {};
+	buffer[size] = str[size];
+	for (int i = 0, j = 0; j < size; i++, j++)
+	{
+		if (buffer[j] == ' ')
+		{
+			i--;
+			continue;
+		}
+		str[i] = buffer[j];
+	}
 	if (size % 2 != 0) return false;
 	for (int i = 0, j = size - 1; i < size / 2; i++, j--) if (str[i] != str[j]) return false;
 	return true;
@@ -131,7 +143,6 @@ int To_Int_Number(char str[])
 		if ((int)str[i] >= 48 && str[i] <= 57)
 		{
 			number = number * 10 + (int)str[i] - 48;
-
 		}
 	}
 	return number;
