@@ -7,7 +7,7 @@ using namespace std;
 int StringLenght(const char str[]);
 char To_Lower(char str[]);
 char To_Upper(char str[]);
-char Shrink(char str[], int &size);
+char* Shrink(char str[], int &size);
 bool Is_Palindrome(char str[]);
 bool Is_Int_Number(char str[]);
 int To_Int_Number(char str[]);
@@ -41,8 +41,7 @@ void main()
 	cout << str << endl << endl;
 
 	cout << "Удаляем из строки все лишние пробелы" << endl;
-	str[size] = Shrink(str, size);
-	cout << str << endl << endl;	
+	cout << Shrink(str, size) << endl << endl;
 
 	cout << "Определяем является ли строка полиндромом" << endl;
 	if (Is_Palindrome(str)) cout << "Строка является полиндромом" << endl << endl;
@@ -89,22 +88,31 @@ char To_Lower(char str[])
 	return str[size];
 }
 
-char Shrink(char str[], int& size) // Пробел  32 в таблице
+char* Shrink(char str[], int& size) // Пробел  32 в таблице
 {
-	char buffer[256]{};
-	for (int i = 0; i < size; i++)buffer[i] = str[i];
-	bool temp = false;
-	int j = 0;
-	for (int i = 0; i < size; i++, j++)
+	//char buffer[256]{};
+	//for (int i = 0; i < size; i++)buffer[i] = str[i];
+	//bool temp = false;
+	//int j = 0;
+	//for (int i = 0; i < size; i++, j++)
+	//{
+	//	if (temp) if ((int)buffer[i] == 32) j--;
+	//	str[j] = buffer[i];
+	//	if ((int)buffer[i] == 32) temp = true;
+	//	else temp = false;
+	//}
+	//for (int i = j; i <= size; i++) str[i] = {};
+	//size = j;
+	//return str[size];
+
+	for (int i = 0; str[i]; i++)
 	{
-		if (temp) if ((int)buffer[i] == 32) j--;
-		str[j] = buffer[i];
-		if ((int)buffer[i] == 32) temp = true;
-		else temp = false;
+		while (str[i] == ' ' && str[i + 1] == ' ')
+		{
+			for (int j = i + 1; str[j]; j++)str[j] = str[j + 1];
+		}
 	}
-	for (int i = j; i <= size; i++) str[i] = {};
-	size = j;
-	return str[size];
+	return str;
 }
 
 bool Is_Palindrome(char str[])
