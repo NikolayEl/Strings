@@ -128,16 +128,11 @@ int To_Int_Number(char str[])
 	int number = 0;
 	for (int i = 0; i < size; i++)
 	{
-		if ((int)str[i] == 48) number *= 10;
-		if ((int)str[i] == 49) number = number * 10 + 1;
-		if ((int)str[i] == 50) number = number * 10 + 2;
-		if ((int)str[i] == 51) number = number * 10 + 3;
-		if ((int)str[i] == 52) number = number * 10 + 4;
-		if ((int)str[i] == 53) number = number * 10 + 5;
-		if ((int)str[i] == 54) number = number * 10 + 6;
-		if ((int)str[i] == 55) number = number * 10 + 7;
-		if ((int)str[i] == 56) number = number * 10 + 8;
-		if ((int)str[i] == 57) number = number * 10 + 9;
+		if ((int)str[i] >= 48 && str[i] <= 57)
+		{
+			number = number * 10 + (int)str[i] - 48;
+
+		}
 	}
 	return number;
 }
