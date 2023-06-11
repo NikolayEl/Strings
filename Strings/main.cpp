@@ -15,6 +15,7 @@ int To_Int_Number(char str[]);
 char* remove_symbol(char str[], char symbol);
 bool Is_Bin_Number(const char str[]);
 int To_Bin_Number(const char str[]);
+bool Is_Hex_Number(const char str[]);
 
 void main()
 {
@@ -65,6 +66,9 @@ void main()
 
 	cout << "Если строка является двоичным числом, возвращает его десятичное значение" << endl;
 	if (Is_Bin_Number(str)) cout << "Десятичное значение двочиного числа " << str << " - " << To_Bin_Number(str) << endl;
+	
+	cout << endl << "Проверяем является ли число шестнадцатиричным числом" << endl;
+	cout << "Строка " << (Is_Hex_Number(str) ? "" : "НЕ ") << "является шестнадцатиричным числом" << endl << endl;
 }
 
 
@@ -211,4 +215,11 @@ int To_Bin_Number(const char str[]) // my code, int - потому что воз
 	}
 	return decimal_number;
 }
+
+bool Is_Hex_Number(const char str[])
+{
+	for (int i = 0; str[i]; i++) if (!((str[i] >= '0' && str[i] <= '9') || (str[i] >= 'A' && str[i] <= 'F'))) return false;
+	return true;
+}
+
 
