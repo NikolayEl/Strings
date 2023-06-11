@@ -13,7 +13,8 @@ bool Is_Palindrome(const char str[]);
 bool Is_Int_Number(char str[]);
 int To_Int_Number(char str[]);
 char* remove_symbol(char str[], char symbol);
-bool Is_BIn_Number(const char str[]);
+bool Is_Bin_Number(const char str[]);
+int To_Bin_Number(const char str[]);
 
 void main()
 {
@@ -60,9 +61,10 @@ void main()
 	else cout << "Строка не целое число и мы не можем перевести его значение в int" << endl << endl;
 
 	cout << "Проверяем является ли число двоичным числом" << endl;
-	cout << "Строка " << (Is_BIn_Number(str) ? "" : "НЕ ") << "является двоичным числом" << endl << endl;
+	cout << "Строка " << (Is_Bin_Number(str) ? "" : "НЕ ") << "является двоичным числом" << endl << endl;
 
-	cout << str << endl;
+	cout << "Если строка является двоичным числом, возвращает его десятичное значение" << endl;
+	if (Is_Bin_Number(str)) cout << "Десятичное значение двочиного числа " << str << " - " << To_Bin_Number(str) << endl;
 }
 
 
@@ -188,8 +190,25 @@ char* remove_symbol(char str[], char symbol)
 	return str;
 }
 
-bool Is_BIn_Number(const char str[]) //Делаем константой ибо функция вовзащает true or false и не видет опрерация над строкой
+bool Is_Bin_Number(const char str[]) //Делаем константой ибо функция вовзащает true or false и не видет опрерация над строкой
 {
 	for (int i = 0; str[i]; i++) if (str[i] != '0' && str[i] != '1') return false;
 	return true;
 }
+
+int To_Bin_Number(const char str[]) // my code, int - потому что возвращаем десятичное число, const - потому что не меняем изначальное значение массива str
+{
+	int decimal_number = 0; // Задаем вовзращаемую переменную
+	for (int i = 0; i < strlen(str); i++)
+	{
+		int temp = 0; 
+		if (str[i] != '0') // убираем лишние иттерации, потому как умножение на 0 всегда равны 0
+		{
+			temp = 1;
+			for (int j = 0; j < (strlen(str) - i - 1); j++) temp *= 2;
+		}
+		decimal_number += temp;
+	}
+	return decimal_number;
+}
+
