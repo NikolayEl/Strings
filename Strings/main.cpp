@@ -13,6 +13,7 @@ bool Is_Palindrome(const char str[]);
 bool Is_Int_Number(char str[]);
 int To_Int_Number(char str[]);
 char* remove_symbol(char str[], char symbol);
+bool Is_BIn_Number(const char str[]);
 
 void main()
 {
@@ -57,6 +58,9 @@ void main()
 	cout << "Если строка является целым числом, то возвращаем его значение" << endl;
 	if (Is_Int_Number(str)) cout << "Возвращаемое число - " << To_Int_Number(str) << ", показываем тип числа - " << typeid(To_Int_Number(str)).name() << endl << endl;
 	else cout << "Строка не целое число и мы не можем перевести его значение в int" << endl << endl;
+
+	cout << "Проверяем является ли число двоичным числом" << endl;
+	cout << "Строка " << (Is_BIn_Number(str) ? "" : "НЕ ") << "является двоичным числом" << endl << endl;
 
 	cout << str << endl;
 }
@@ -182,4 +186,10 @@ char* remove_symbol(char str[], char symbol)
 		while (str[i] == symbol)for (int j = i; str[j]; j++)str[j] = str[j + 1];
 	}
 	return str;
+}
+
+bool Is_BIn_Number(const char str[]) //Делаем константой ибо функция вовзащает true or false и не видет опрерация над строкой
+{
+	for (int i = 0; str[i]; i++) if (str[i] != '0' && str[i] != '1') return false;
+	return true;
 }
