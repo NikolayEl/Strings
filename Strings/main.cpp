@@ -213,12 +213,9 @@ int To_Bin_Number(const char str[]) // my code, int - потому что воз
 	int decimal_number = 0; // Задаем вовзращаемую переменную
 	for (int i = 0; i < strlen(str); i++)
 	{
-		int temp = 0; 
-		if (str[i] != '0') // убираем лишние иттерации, потому как умножение на 0 всегда равны 0
-		{
-			temp = 1;
-			for (int j = 0; j < (strlen(str) - i - 1); j++) temp *= 2;
-		}
+		if (str[i] == '0') continue; // убираем лишние иттерации, потому как умножение на 0 всегда равны 0
+		int temp = 1;
+		for (int j = 0; j < (strlen(str) - i - 1); j++) temp *= 2;
 		decimal_number += temp;
 	}
 	return decimal_number;
@@ -230,19 +227,18 @@ bool Is_Hex_Number(const char str[])
 	return true;
 }
 
-int To_Hex_Number(const char str[]) //Для цифр от A до F надо просто отнять 55, а для цифр надо отнять 48
+
+int To_Hex_Number(const char str[]) // my code, Для цифр от A до F надо просто отнять 55, а для цифр надо отнять 48
 {
 	int decimal_number = 0; // Задаем вовзращаемую переменную
 	for (int i = 0; i < strlen(str); i++)
 	{
 		int hex_number = 0;
-		int temp = 0;
-		if (str[i] != '0') // убираем лишние иттерации, потому как умножение на 0 всегда равны 0
-		{
-			temp = 1;
-			for (int j = 0; j < (strlen(str) - i - 1); j++) temp *= 16; 
-		}
-		if (str[i] >= 0 && str[i] <= 9) hex_number = (int)str[i] - 48; //для цифр от 0 до 9 надо отнять 48 от int значения
+		if (str[i] == '0') continue; // убираем лишние иттерации, потому как умножение на 0 всегда равны 0
+		int temp = 1;
+		for (int j = 0; j < (strlen(str) - i - 1); j++) temp *= 16; 
+
+		if (str[i] >= '0' && str[i] <= '9') hex_number = (int)str[i] - 48; //для цифр от 0 до 9 надо отнять 48 от int значения
 		if (str[i] >= 'A' && str[i] <= 'F') hex_number = (int)str[i] - 55; //Для букв от A до F надо просто отнять 55 от int значения
 		decimal_number += hex_number * temp;
 	}
