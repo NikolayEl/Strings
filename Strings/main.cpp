@@ -10,12 +10,16 @@ char* To_Lower(char str[]);
 char To_Upper(char str[]);
 char* Shrink(char str[], int &size);
 bool Is_Palindrome(const char str[]);
+char* remove_symbol(char str[], char symbol);
+
 bool Is_Int_Number(char str[]);
 int To_Int_Number(char str[]);
-char* remove_symbol(char str[], char symbol);
+
 bool Is_Bin_Number(const char str[]);
 int To_Bin_Number(const char str[]);
+
 bool Is_Hex_Number(const char str[]);
+int To_Hex_Number(const char str[]);
 
 void main()
 {
@@ -37,15 +41,15 @@ void main()
 	cout << str << endl;
 	cout << "Размер введенной строки - " << StringLenght(str) << endl << endl;
 	//---------------------------------------------------------------------------------------
-	cout << "Переводим всю строку в нижний регистр" << endl;
-	cout << To_Lower(str) << endl << endl;
+	//cout << "Переводим всю строку в нижний регистр" << endl;
+	//cout << To_Lower(str) << endl << endl;
 
-	cout << "Переводим всю строку в верхний регистр" << endl;
-	str[size] = To_Upper(str);
-	cout << str << endl << endl;
+	//cout << "Переводим всю строку в верхний регистр" << endl;
+	//str[size] = To_Upper(str);
+	//cout << str << endl << endl;
 
-	cout << "Удаляем из строки все лишние пробелы" << endl;
-	cout << Shrink(str, size) << endl << endl;
+	//cout << "Удаляем из строки все лишние пробелы" << endl;
+	//cout << Shrink(str, size) << endl << endl;
 
 	//cout << "Определяем является ли строка полиндромом" << endl;
 	//if (Is_Palindrome(str)) cout << "Строка является полиндромом" << endl << endl;
@@ -65,10 +69,14 @@ void main()
 	cout << "Строка " << (Is_Bin_Number(str) ? "" : "НЕ ") << "является двоичным числом" << endl << endl;
 
 	cout << "Если строка является двоичным числом, возвращает его десятичное значение" << endl;
-	if (Is_Bin_Number(str)) cout << "Десятичное значение двочиного числа " << str << " - " << To_Bin_Number(str) << endl;
+	if (Is_Bin_Number(str)) cout << "Десятичное значение двоичного числа " << str << " - " << To_Bin_Number(str) << endl;
 	
-	cout << endl << "Проверяем является ли число шестнадцатиричным числом" << endl;
+	cout << endl << "Проверяем является ли число шестнадцатиричным числом (цифры пишем только с большой буквы!)" << endl;
 	cout << "Строка " << (Is_Hex_Number(str) ? "" : "НЕ ") << "является шестнадцатиричным числом" << endl << endl;
+
+	if (Is_Hex_Number(str)) cout << "Если строка является шестнадцатиричным числом, возвращает его десятичное значение" << endl;
+	if (Is_Hex_Number(str)) cout << "Десятичное значение шестнадцатиричного числа " << str << " - " << To_Hex_Number(str) << endl;
+	
 }
 
 
@@ -220,6 +228,25 @@ bool Is_Hex_Number(const char str[])
 {
 	for (int i = 0; str[i]; i++) if (!((str[i] >= '0' && str[i] <= '9') || (str[i] >= 'A' && str[i] <= 'F'))) return false;
 	return true;
+}
+
+int To_Hex_Number(const char str[]) //Для цифр от A до F надо просто отнять 55, а для цифр надо отнять 48
+{
+	int decimal_number = 0; // Задаем вовзращаемую переменную
+	for (int i = 0; i < strlen(str); i++)
+	{
+		int hex_number = 0;
+		int temp = 0;
+		if (str[i] != '0') // убираем лишние иттерации, потому как умножение на 0 всегда равны 0
+		{
+			temp = 1;
+			for (int j = 0; j < (strlen(str) - i - 1); j++) temp *= 16; 
+		}
+		if (str[i] >= 0 && str[i] <= 9) hex_number = (int)str[i] - 48; //для цифр от 0 до 9 надо отнять 48 от int значения
+		if (str[i] >= 'A' && str[i] <= 'F') hex_number = (int)str[i] - 55; //Для букв от A до F надо просто отнять 55 от int значения
+		decimal_number += hex_number * temp;
+	}
+	return decimal_number;
 }
 
 
