@@ -16,10 +16,10 @@ bool Is_Int_Number(char str[]);
 int To_Int_Number(char str[]);
 
 bool Is_Bin_Number(const char str[]);
-int To_Bin_Number(const char str[]);
+int Bin_To_Dec(const char str[]);
 
 bool Is_Hex_Number(const char str[]);
-int To_Hex_Number(const char str[]);
+int Hex_To_Dec(const char str[]);
 
 void main()
 {
@@ -69,13 +69,13 @@ void main()
 	cout << "Строка " << (Is_Bin_Number(str) ? "" : "НЕ ") << "является двоичным числом" << endl << endl;
 
 	if (Is_Bin_Number(str)) cout << "Если строка является двоичным числом, возвращает его десятичное значение" << endl;
-	if (Is_Bin_Number(str)) cout << "Десятичное значение двоичного числа " << str << " = " << To_Bin_Number(str) << endl;
+	if (Is_Bin_Number(str)) cout << "Десятичное значение двоичного числа " << str << " = " << Bin_To_Dec(str) << endl;
 	
 	cout << endl << "Проверяем является ли число шестнадцатиричным числом (цифры пишем только с большой буквы!)" << endl;
 	cout << "Строка " << (Is_Hex_Number(str) ? "" : "НЕ ") << "является шестнадцатиричным числом" << endl << endl;
 
 	if (Is_Hex_Number(str)) cout << "Если строка является шестнадцатиричным числом, возвращает его десятичное значение" << endl;
-	if (Is_Hex_Number(str)) cout << "Десятичное значение шестнадцатиричного числа " << str << " = " << To_Hex_Number(str) << endl;
+	if (Is_Hex_Number(str)) cout << "Десятичное значение шестнадцатиричного числа " << str << " = " << Hex_To_Dec(str) << endl;
 	
 }
 
@@ -207,7 +207,7 @@ bool Is_Bin_Number(const char str[]) //Делаем константой ибо 
 	return true;
 }
 
-int To_Bin_Number(const char str[]) // my code, int - потому что возвращаем десятичное число, const - потому что не меняем изначальное значение массива str
+int Bin_To_Dec(const char str[]) // my code, int - потому что возвращаем десятичное число, const - потому что не меняем изначальное значение массива str
 {
 	int decimal_number = 0; // Задаем вовзращаемую переменную
 	for (int i = 0; i < strlen(str); i++)
@@ -227,7 +227,7 @@ bool Is_Hex_Number(const char str[])
 }
 
 
-int To_Hex_Number(const char str[]) // my code, Для цифр от A до F надо просто отнять 55, а для цифр надо отнять 48
+int Hex_To_Dec(const char str[]) // my code, Для цифр от A до F надо просто отнять 55, а для цифр надо отнять 48
 {
 	int decimal_number = 0; // Задаем вовзращаемую переменную
 	for (int i = 0; i < strlen(str); i++)
