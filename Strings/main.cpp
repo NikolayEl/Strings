@@ -178,8 +178,7 @@ bool Is_Palindrome(const char str[])
 
 bool Is_Int_Number(char str[])
 {
-	int size = StringLenght(str); //my code
-	for (int i = 0; i < size; i++) if ((int)str[i] < 48 || (int)str[i] > 57) return false;
+	for (int i = 0; str[i]; i++) if ((int)str[i] < 48 || (int)str[i] > 57) return false;
 	return true;
 }
 
